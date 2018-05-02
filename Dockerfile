@@ -36,6 +36,8 @@ RUN wget -c http://apache.mirror.cdnetworks.com/activemq/activemq-apollo/1.7.1/a
 RUN apache-apollo-1.7.1/bin/apollo create sample-broker
 WORKDIR /home/apollo/sample-broker
 
+ADD config/apollo.xml etc/
+
 EXPOSE 61613 61614 61623 61624 61680 61681
 
 CMD bin/apollo-broker run
