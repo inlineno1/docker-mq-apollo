@@ -28,6 +28,7 @@ RUN echo 'apollo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN echo "export JAVA_HOME=/usr/java/latest" >> /etc/profile
 RUN echo "alias ll='ls -l --color=auto'" >> /etc/profile
 RUN echo "alias grep='grep --color=auto'" >> /etc/profile
+RUN source /etc/profile
 
 # install apollo
 WORKDIR /home/apollo
