@@ -1,22 +1,4 @@
-FROM centos:centos7
-
-# yum update
-RUN yum update -y
-
-# timezone (Aisa/Seoul)
-RUN cp -p /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-RUN yum -y install rdate
-RUN rdate -l time.bora.net
-
-# wget
-RUN yum -y install wget
-
-# sudo
-RUN yum -y install sudo
-
-# java install
-RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm
-RUN rpm -ivh jdk-8u172-linux-x64.rpm && rm jdk-8u172-linux-x64.rpm
+FROM inlineno1/centos7:0.1
 
 # create user
 RUN adduser apollo
@@ -35,9 +17,9 @@ RUN wget -c http://apache.mirror.cdnetworks.com/activemq/activemq-apollo/1.7.1/a
         rm apache-apollo-1.7.1-unix-distro.tar.gz
 RUN apache-apollo-1.7.1/bin/apollo create sample-broker
 WORKDIR /home/apollo/sample-broker
-
 ADD config/apollo.xml etc/
 
+# port mapping
 EXPOSE 61613 61614 61623 61624 61680 61681
 
 CMD bin/apollo-broker run
